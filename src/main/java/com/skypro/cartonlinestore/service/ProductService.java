@@ -5,8 +5,7 @@ import com.skypro.cartonlinestore.record.ProductRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ProductService {
