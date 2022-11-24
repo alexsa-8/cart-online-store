@@ -1,28 +1,22 @@
 package com.skypro.cartonlinestore.service;
 
-import com.skypro.cartonlinestore.model.Product;
-import com.skypro.cartonlinestore.record.ProductRequest;
+import com.skypro.cartonlinestore.repository.CartRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ProductService {
-    private final Map<Integer, Product> product=new HashMap<>();
+    private final CartRepository cartRepository;
 
-    public Collection<Product> getAllProducts() {
-        return this.product.values();
+    public ProductService(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
     }
 
-    public Product addProduct(ProductRequest productRequest)throws IllegalAccessException{
-        if (productRequest.getNameProduct()==null || productRequest.getPrice()==0){
-            throw new IllegalAccessException("Введите название и цену.");
-        }
-        Product product=new Product(productRequest.getNameProduct(),
-                productRequest.getPrice());
-        this.product.put(product.getId(), product);
-        return product;
+    public void addToCart(List<Integer> ids){
+        this.cartRepository.addToCart(ids);
+    }
+    public List<Integer> getCartContent(){
+
+        return this.cartRepository.getCartContent();
     }
 }
